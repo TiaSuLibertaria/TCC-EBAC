@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "84047939-a27d-405c-b0ab-7c98949e75cd",
+		"name": "Requisições de cupons da EBAC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25278152"
+	},
+	"item": [
+		{
+			"name": "Cadastrar cupons",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const code = `promo10${new Date().getTime()}`",
+							"",
+							"pm.collectionVariables.set('code', code)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve salvar um cupom com dados válidos\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "@admin!&b@c!2022",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin_ebac",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"{{code}}\",\n    \"amount\": \"10\",\n    \"discount_type\": \"fixed_product\",\n    \"description\": \"Cupom de desconto de teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/wc/v3/coupons",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"wc",
+						"v3",
+						"coupons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar cupon com código repetido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Não deve permitir cadastro de cupom com nome repetido', () => {",
+							"    pm.response.to.have.status(400)",
+							"    const response = pm.response.json()",
+							"    const { message } = response",
+							"    pm.expect(message).to.equal('O código de cupom já existe')",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "@admin!&b@c!2022",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin_ebac",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"{{code}}\",\n    \"amount\": \"10\",\n    \"discount_type\": \"fixed_product\",\n    \"description\": \"Cupom de desconto de teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/wc/v3/coupons",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"wc",
+						"v3",
+						"coupons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todos os cupons",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deve validar o id dos cupons\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    const code = pm.collectionVariables.get('code')",
+							"    pm.expect(pm.response.text()).to.include(code);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "@admin!&b@c!2022",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin_ebac",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/wc/v3/coupons",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"wc",
+						"v3",
+						"coupons"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://lojaebac.ebaconline.art.br/wp-json",
+			"type": "string"
+		},
+		{
+			"key": "code",
+			"value": ""
+		}
+	]
+}

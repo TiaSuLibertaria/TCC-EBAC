@@ -1,0 +1,47 @@
+{
+	"id": "074c9854-e5f8-427d-906b-e15aa102eac5",
+	"name": "Requisições sobre cupons da EBAC",
+	"timestamp": "2023-05-10T13:54:44.313Z",
+	"collection_id": "25278152-84047939-a27d-405c-b0ab-7c98949e75cd",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "49f99058-cdb9-43fb-972f-7a85be2ffa57",
+			"name": "Buscar todos os cupons",
+			"time": 246,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				1001,
+				290,
+				293,
+				394,
+				246
+			],
+			"allTests": [
+				{},
+				{},
+				{},
+				{},
+				{}
+			]
+		}
+	],
+	"count": 5,
+	"totalTime": 2224,
+	"collection": {
+		"requests": [
+			{
+				"id": "49f99058-cdb9-43fb-972f-7a85be2ffa57",
+				"method": "GET"
+			}
+		]
+	}
+}
