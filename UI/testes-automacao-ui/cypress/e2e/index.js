@@ -7,7 +7,5 @@ describe('Adicionar itens no carrinho', () => {
     it('Deve adicionar 3 produtos diferentes no carrinho', () => {
       cy.visit('produtos/page/4/');
       cy.adicionarProduto(3, 32, 'Black');
-      
-
     })
 })
