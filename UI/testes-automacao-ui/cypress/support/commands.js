@@ -25,19 +25,14 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add(
-  'adicionarProduto',
-  (ordemProduto, tamanho, cor, quantidade) => {
-    cy.get(
-      `.grid.product:nth-of-type(${ordemProduto}) > .product-block`
-    ).click();
-    cy.get('.button-variable-item-' + tamanho).click();
-    cy.get('.button-variable-item-' + cor).click();
-    cy.get('.input-text').clear().type(`${quantidade}`);
-    cy.get('.single_add_to_cart_button').click();
-  }
-);
-
-Cypress.Commands.add('adicionarCupon', (cupon) => {
-  cy.get('#coupon_code').type(cupon);
-  //cy.get('.coupon > .btn').click();
-});
+    'adicionarProduto',
+    (ordemProduto, tamanho, cor, quantidade) => {
+      cy.get(
+        `.grid.product:nth-of-type(${ordemProduto}) > .product-block`
+      ).click();
+      cy.get('.button-variable-item-' + tamanho).click();
+      cy.get('.button-variable-item-' + cor).click();
+      cy.get('.input-text').clear().type(`${quantidade}`);
+      cy.get('.single_add_to_cart_button').click();
+    }
+  );
